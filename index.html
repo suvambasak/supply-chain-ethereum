@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Blockchain</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.2.6/dist/web3.min.js"></script>
+    <script type="text/javascript">
+        var contract;
+        var address = "0xce18366dc8411502ae663fcff4e077df39d6e2cd";
+        var abi = [
+            {
+                "inputs": [
+                    {
+                        "internalType": "string",
+                        "name": "_firstname",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "_lastname",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "int256",
+                        "name": "_marks",
+                        "type": "int256"
+                    }
+                ],
+                "name": "addNewRecord",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "stateMutability": "nonpayable",
+                "type": "constructor"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "int256",
+                        "name": "_id",
+                        "type": "int256"
+                    }
+                ],
+                "name": "showStudentById",
+                "outputs": [
+                    {
+                        "internalType": "string",
+                        "name": "",
+                        "type": "string"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "studentCount",
+                "outputs": [
+                    {
+                        "internalType": "int256",
+                        "name": "",
+                        "type": "int256"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "int256",
+                        "name": "",
+                        "type": "int256"
+                    }
+                ],
+                "name": "studentRecords",
+                "outputs": [
+                    {
+                        "internalType": "int256",
+                        "name": "_id",
+                        "type": "int256"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "_firstname",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "_lastname",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "int256",
+                        "name": "marks",
+                        "type": "int256"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            }
+        ]
+
+        web3 = new Web3(web3.currentProvider);
+        contract = new web3.eth.Contract(abi, address);
+
+        $(document).ready(function () {
+            $("#_show").click(function () {
+                var student_id = parseInt($("#_id").val());
+                contract.methods.showStudentById(student_id).call().then(function (name) {
+                    $("#_details").val(name);
+                });
+            });
+
+            // $("#_add").click(function(){
+            //     web2.eth.getAccounts().then(function(accounts){
+
+            //     });
+            // });
+
+        });
+    </script>
+</head>
+
+<body>
+    <label for="id">Student ID : </label><br>
+    <input type="text" id="_id" name="id"><br>
+
+    <label for="details">Student Details : </label><br>
+    <input type="text" id="_details" name="details"><br>
+
+    <input type="submit" value="ADD" id="_add">
+    <input type="submit" value="SHOW" id="_show">
+</body>
+
+</html>
