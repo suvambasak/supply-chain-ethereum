@@ -160,11 +160,20 @@
                 });
             });
 
-            // $("#_add").click(function(){
-            //     web2.eth.getAccounts().then(function(accounts){
+            $("#_add").click(function () {
+                web3.eth.getAccounts().then(function (accounts) {
+                    var account = accounts[0];
 
-            //     });
-            // });
+                    var fname = $("#_fname").val();
+                    var lname = $("#_lname").val();
+                    var marks = $("#_marks").val();
+
+                    return contract.methods.addNewRecord(fname, lname, marks).send({ from: account });
+                }).then(function (trx) {
+                    console.log(trx);
+                    alert("Student details added");
+                });
+            });
 
         });
     </script>
