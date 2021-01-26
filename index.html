@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.2.6/dist/web3.min.js"></script>
     <script type="text/javascript">
         var contract;
-        var address = "0xce18366dc8411502ae663fcff4e077df39d6e2cd";
+        var address = "0xb96c0f28aec3e897ba329e86368045a15d47cf3e";
         var abi = [
             {
                 "inputs": [
@@ -45,12 +45,50 @@
                         "type": "int256"
                     }
                 ],
-                "name": "showStudentById",
+                "name": "getFirstNameById",
                 "outputs": [
                     {
                         "internalType": "string",
                         "name": "",
                         "type": "string"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "int256",
+                        "name": "_id",
+                        "type": "int256"
+                    }
+                ],
+                "name": "getLastNameById",
+                "outputs": [
+                    {
+                        "internalType": "string",
+                        "name": "",
+                        "type": "string"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "int256",
+                        "name": "_id",
+                        "type": "int256"
+                    }
+                ],
+                "name": "getMarksById",
+                "outputs": [
+                    {
+                        "internalType": "int256",
+                        "name": "",
+                        "type": "int256"
                     }
                 ],
                 "stateMutability": "view",
@@ -111,8 +149,14 @@
         $(document).ready(function () {
             $("#_show").click(function () {
                 var student_id = parseInt($("#_id").val());
-                contract.methods.showStudentById(student_id).call().then(function (name) {
-                    $("#_details").val(name);
+                contract.methods.getFirstNameById(student_id).call().then(function (name) {
+                    $("#_fname").val(name);
+                });
+                contract.methods.getLastNameById(student_id).call().then(function (name) {
+                    $("#_lname").val(name);
+                });
+                contract.methods.getMarksById(student_id).call().then(function (name) {
+                    $("#_marks").val(name);
                 });
             });
 
@@ -128,13 +172,19 @@
 
 <body>
     <label for="id">Student ID : </label><br>
-    <input type="text" id="_id" name="id"><br>
+    <input type="text" id="_id" name="id">
+    <input type="submit" value="SHOW" id="_show"><br>
 
-    <label for="details">Student Details : </label><br>
-    <input type="text" id="_details" name="details"><br>
+    <label for="fname">First Name : </label><br>
+    <input type="text" id="_fname" name="fname"><br>
+
+    <label for="lname">Last Name : </label><br>
+    <input type="text" id="_lname" name="lname"><br>
+
+    <label for="marks">Marks : </label><br>
+    <input type="text" id="_marks" name="marks"><br>
 
     <input type="submit" value="ADD" id="_add">
-    <input type="submit" value="SHOW" id="_show">
 </body>
 
 </html>
