@@ -2,13 +2,27 @@
 
 <head>
     <title>Blockchain</title>
+
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.2.6/dist/web3.min.js"></script>
     <script type="text/javascript">
         var contract;
-        var address = "0xb96c0f28aec3e897ba329e86368045a15d47cf3e";
+        var address = "0x23fee5e4634fb2917db4aff7f078199fdb47fe8a";
         var abi = [
+            {
+                "inputs": [
+                    {
+                        "internalType": "int256",
+                        "name": "_id",
+                        "type": "int256"
+                    }
+                ],
+                "name": "addBonusMarks",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
             {
                 "inputs": [
                     {
@@ -147,16 +161,35 @@
         contract = new web3.eth.Contract(abi, address);
 
         $(document).ready(function () {
+            $("#_add").hide();
+            $("#_addbonus").hide();
+
+
             $("#_show").click(function () {
                 var student_id = parseInt($("#_id").val());
+
                 contract.methods.getFirstNameById(student_id).call().then(function (name) {
                     $("#_fname").val(name);
                 });
+
                 contract.methods.getLastNameById(student_id).call().then(function (name) {
                     $("#_lname").val(name);
                 });
+
                 contract.methods.getMarksById(student_id).call().then(function (name) {
                     $("#_marks").val(name);
+                });
+            });
+
+            $("#_addbonus").click(function () {
+                web3.eth.getAccounts().then(function (accounts) {
+                    var account = accounts[0];
+                    var student_id = parseInt($("#_id").val());
+
+                    return contract.methods.addBonusMarks(student_id).send({ from: account });
+                }).then(function (trx) {
+                    console.log(trx);
+                    alert("Marks updated");
                 });
             });
 
@@ -175,8 +208,19 @@
                 });
             });
 
+            $("#_id").click(function () {
+                $("#_add").hide();
+                $("#_addbonus").show();
+            });
+
+            $("#_fname").click(function () {
+                $("#_add").show();
+                $("#_addbonus").hide();
+            });
+
         });
     </script>
+
     <style type="text/css">
         div {
             margin-left: 36%;
@@ -199,7 +243,10 @@
 
         <label for="marks">Marks : </label>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="text" id="_marks" name="marks"><br><br>
+        <input type="text" id="_marks" name="marks">
+
+
+        <input type="submit" value="BONUS" id="_addbonus"><br><br>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <input type="submit" value="ADD" id="_add">
     </div>
