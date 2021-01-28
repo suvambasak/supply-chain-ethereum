@@ -8,13 +8,18 @@
     <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.2.6/dist/web3.min.js"></script>
     <script type="text/javascript">
         var contract;
-        var address = "0x23fee5e4634fb2917db4aff7f078199fdb47fe8a";
+        var address = "0xf2aeef4bbf406fe22a3dad09f3ea9f86fe9d7e47";
         var abi = [
             {
                 "inputs": [
                     {
                         "internalType": "int256",
                         "name": "_id",
+                        "type": "int256"
+                    },
+                    {
+                        "internalType": "int256",
+                        "name": "_marks",
                         "type": "int256"
                     }
                 ],
@@ -163,9 +168,35 @@
         $(document).ready(function () {
             $("#_add").hide();
             $("#_addbonus").hide();
+            $("#_show").hide();
+
+            $("#_bmarks").hide();
+            $("#bmarks_label").hide();
+
+            $("#_id").click(function(){
+                $("#_show").show();
+                $("#_add").hide();
+            });
+
+            $("#_bmarks").click(function(){
+                $("#_addbonus").show();
+            });
+
+            $("#_fname").click(function(){
+                $("#_show").hide();
+                $("#_bmarks").hide();
+                $("#bmarks_label").hide();
+                $("#_addbonus").hide();
+
+                $("#_add").show();
+            });
+
 
 
             $("#_show").click(function () {
+                $("#_bmarks").show();
+                $("#bmarks_label").show();
+
                 var student_id = parseInt($("#_id").val());
 
                 contract.methods.getFirstNameById(student_id).call().then(function (name) {
@@ -185,8 +216,9 @@
                 web3.eth.getAccounts().then(function (accounts) {
                     var account = accounts[0];
                     var student_id = parseInt($("#_id").val());
+                    var bonus = parseInt($("#_bmarks").val());
 
-                    return contract.methods.addBonusMarks(student_id).send({ from: account });
+                    return contract.methods.addBonusMarks(student_id, bonus).send({ from: account });
                 }).then(function (trx) {
                     console.log(trx);
                     alert("Marks updated");
@@ -208,22 +240,12 @@
                 });
             });
 
-            $("#_id").click(function () {
-                $("#_add").hide();
-                $("#_addbonus").show();
-            });
-
-            $("#_fname").click(function () {
-                $("#_add").show();
-                $("#_addbonus").hide();
-            });
-
         });
     </script>
 
     <style type="text/css">
         div {
-            margin-left: 36%;
+            margin-left: 35%;
             margin-top: 10%;
         }
     </style>
@@ -232,23 +254,29 @@
 <body>
     <div>
         <label for="id">Student ID : </label>
+        &nbsp;&nbsp;&nbsp;
         <input type="text" id="_id" name="id">
         <input type="submit" value="SHOW" id="_show"><br><br>
 
         <label for="fname">First Name : </label>
+        &nbsp;&nbsp;
         <input type="text" id="_fname" name="fname"><br><br>
 
         <label for="lname">Last Name : </label>
+        &nbsp;&nbsp;&nbsp;
         <input type="text" id="_lname" name="lname"><br><br>
 
         <label for="marks">Marks : </label>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="text" id="_marks" name="marks">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="text" id="_marks" name="marks"><br><br>
 
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="submit" value="ADD" id="_add"><br>
 
+        <label for="bmarks" id="bmarks_label">Bonus Marks : </label>
+        <input type="text" id="_bmarks" name="bmarks">
         <input type="submit" value="BONUS" id="_addbonus"><br><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="submit" value="ADD" id="_add">
+        
     </div>
 </body>
 

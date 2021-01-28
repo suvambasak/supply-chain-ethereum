@@ -35,8 +35,8 @@ contract MyContract{
         return studentRecords[_id].marks;
     }
     
-    function addBonusMarks(int _id) public onlyOwner{
-        studentRecords[_id].marks= studentRecords[_id].marks+5;
+    function addBonusMarks(int _id, int _marks) public onlyOwner{
+        studentRecords[_id].marks= studentRecords[_id].marks+_marks;
     }
     
     function addNewRecord(string memory _firstname, string memory _lastname, int _marks) public onlyOwner {
