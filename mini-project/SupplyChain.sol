@@ -60,7 +60,17 @@ contract MyContract{
         require(products[_pid].quantity >= _quantity);
         
         totalOrder += 1;
-        orders[totalOrder] = order(totalOrder,_pid,_quantity,"Placed",_cname,_daddress,msg.sender);
+        orders[totalOrder] = order(totalOrder,_pid,_quantity,_cname,"Placed",_daddress,msg.sender);
         products[_pid].quantity -= _quantity;
+    }
+    
+    function trackOrderById(int _oid) view public returns(string memory){
+        require(orders[_oid].customer_address == msg.sender);
+        return (orders[_oid].status);
+    }
+    
+    function updateOrderStatus(int _oid, string memory _status) public{
+        require(products[orders[_oid].product_id].producer_address == msg.sender);
+        orders[_oid].status = _status;
     }
 }
