@@ -5,7 +5,7 @@ contract MyContract{
     mapping(address=>string) public producers;
     
     // Products details.
-    int public totalProducts=0;
+    int public totalProduct=0;
     struct product{
         int id;
         int price;
@@ -47,8 +47,8 @@ contract MyContract{
     }
     
     function addProduct(string memory _pname, int _price, int _quantity) public addProductAuth{
-        totalProducts += 1;
-        products[totalProducts] = product(totalProducts, _price, _quantity, _pname, msg.sender);
+        totalProduct += 1;
+        products[totalProduct] = product(totalProduct, _price, _quantity, _pname, msg.sender);
     }
     
     function updatePrice(int _pid, int _newPrice) public{
@@ -72,5 +72,14 @@ contract MyContract{
     function updateOrderStatus(int _oid, string memory _status) public{
         require(products[orders[_oid].product_id].producer_address == msg.sender);
         orders[_oid].status = _status;
+    }
+    
+    function getTotalProduct() view public returns(int){
+        return totalProduct;
+    }
+    
+    function getProductById(int _pid) view public returns(int, int, string memory){
+        require(_pid<=totalProduct);
+        return (products[_pid].price,products[_pid].quantity,products[_pid].product_name);
     }
 }
