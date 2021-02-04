@@ -28,7 +28,6 @@ contract MyContract{
     }
     mapping(int=>order) public orders;
     
-    
     // register producer authentication.
     modifier reginsterProducerAuth(){
         require(bytes(producers[msg.sender]).length == 0);
@@ -41,7 +40,7 @@ contract MyContract{
         _;
     }
     
-    
+    // Seller
     function reginsterProducer(string memory _name) public reginsterProducerAuth{
         producers[msg.sender] = _name;
     }
@@ -56,24 +55,12 @@ contract MyContract{
         products[_pid].price = _newPrice;
     }
     
-    function placeOrder(string memory _cname, string memory _daddress, int _pid, int _quantity) public{
-        require(products[_pid].quantity >= _quantity);
-        
-        totalOrder += 1;
-        orders[totalOrder] = order(totalOrder,_pid,_quantity,_cname,"Placed",_daddress,msg.sender);
-        products[_pid].quantity -= _quantity;
-    }
-    
-    function trackOrderById(int _oid) view public returns(string memory){
-        require(orders[_oid].customer_address == msg.sender);
-        return (orders[_oid].status);
-    }
-    
     function updateOrderStatus(int _oid, string memory _status) public{
         require(products[orders[_oid].product_id].producer_address == msg.sender);
         orders[_oid].status = _status;
     }
     
+    // customer
     function getTotalProduct() view public returns(int){
         return totalProduct;
     }
@@ -82,4 +69,37 @@ contract MyContract{
         require(_pid<=totalProduct);
         return (products[_pid].price,products[_pid].quantity,products[_pid].product_name);
     }
+    
+    function placeOrder(string memory _cname, string memory _daddress, int _pid, int _quantity) public{
+        require(products[_pid].quantity >= _quantity);
+        
+        totalOrder += 1;
+        orders[totalOrder] = order(totalOrder,_pid,_quantity,_cname,"Placed",_daddress,msg.sender);
+        products[_pid].quantity -= _quantity;
+    }
+    
+    function getTotalOrder() view public returns(int){
+        int counter=0;
+        for(int i=1;i<=totalOrder;i++){
+            if(msg.sender==orders[i].customer_address){
+                counter++;
+            }
+        }
+        return (counter);
+    }
+    
+    function fetchNextOrderId(int _oid) view public returns(int){
+        for(int i=_oid; i<=totalOrder; i++){
+            if(msg.sender==orders[i].customer_address){
+                return (i);
+            }
+        }
+        return (_oid);
+    }
+    
+    function getOrderDetailsById(int _oid) view public returns(int, int, string memory, string memory, string memory){
+        require(msg.sender==orders[_oid].customer_address);
+        return (orders[_oid].product_id, orders[_oid].quantity, orders[_oid].customer_name, orders[_oid].status, orders[_oid].delivery_address);
+    }
+
 }
