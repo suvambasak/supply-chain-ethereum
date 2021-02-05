@@ -40,7 +40,18 @@ contract MyContract{
         _;
     }
     
+    
+    
     // Seller
+    
+    function isRegistered(address _addr) view public returns(bool){
+        if(bytes(producers[_addr]).length == 0){
+            return (false);
+        }else{
+            return (true);
+        }
+    }
+    
     function reginsterProducer(string memory _name) public reginsterProducerAuth{
         producers[msg.sender] = _name;
     }
@@ -48,6 +59,26 @@ contract MyContract{
     function addProduct(string memory _pname, int _price, int _quantity) public addProductAuth{
         totalProduct += 1;
         products[totalProduct] = product(totalProduct, _price, _quantity, _pname, msg.sender);
+    }
+    
+    function getTotalProductByProducer(address _addr) view public returns(int){
+        int counter=0;
+        for(int i=1; i<=totalProduct;i++){
+            if(products[i].producer_address == _addr){
+                counter++;
+            }
+        }
+        return (counter);
+    }
+    
+    function getNextProduct(address _addr, int _pid) view public returns(int, int, int, string memory){
+        require(_pid<=totalProduct);
+        for(int i=_pid;i<=totalProduct;i++){
+            if(products[i].producer_address==_addr){
+                return (products[i].id,products[i].price, products[i].quantity, products[i].product_name);
+            }
+        }
+        return (0,0, 0, "");
     }
     
     function updatePrice(int _pid, int _newPrice) public{
@@ -60,7 +91,12 @@ contract MyContract{
         orders[_oid].status = _status;
     }
     
+    
+    
+    
     // customer
+    
+    
     function getTotalProduct() view public returns(int){
         return totalProduct;
     }
