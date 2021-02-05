@@ -75,7 +75,7 @@ contract MyContract{
         require(_pid<=totalProduct);
         for(int i=_pid;i<=totalProduct;i++){
             if(products[i].producer_address==_addr){
-                return (products[i].id,products[i].price, products[i].quantity, products[i].product_name);
+                return (products[i].id, products[i].price, products[i].quantity, products[i].product_name);
             }
         }
         return (0,0, 0, "");

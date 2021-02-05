@@ -80,11 +80,12 @@
                     </div>
                 </div>
                 <div class="row  mt-5">
-                    <h4>Orders</h4>
-                    <table class="table" id="">
+                    <h4>Your product(s) <span class="badge rounded-pill bg-dark" id="_totalproduct"></span></h4>
+                    
+                    <table class="table" id="_myproduct_table">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
+                                <th scope="col">ID</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Quantity</th>
@@ -92,27 +93,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <!-- <tr>
                                 <th>1</th>
                                 <td>Product 1</td>
                                 <td>300</td>
                                 <td>3</td>
-                                <td><button type="button" class="btn btn-secondary btn-sm" onclick="productOrderClick(1)">Order</button></td>
+                                <td><button type="button" class="btn btn-secondary btn-sm" onclick="priceUpdate(1)">Change price</button></td>
                             </tr>
                             <tr>
                                 <th>2</th>
                                 <td>Product 2</td>
                                 <td>1000</td>
                                 <td>10</td>
-                                <td><button type="button" class="btn btn-secondary btn-sm" onclick="productOrderClick(2)">Order</button></td>
+                                <td><button type="button" class="btn btn-secondary btn-sm" onclick="priceUpdate(2)">Change price</button></td>
                             </tr>
                             <tr>
                                 <th>3</th>
                                 <td>Product 3</td>
                                 <td>550</td>
                                 <td>5</td>
-                                <td><button type="button" class="btn btn-secondary btn-sm" onclick="productOrderClick(3)">Order</button></td>
-                            </tr>
+                                <td><button type="button" class="btn btn-secondary btn-sm" onclick="priceUpdate(3)">Change price</button></td>
+                            </tr> -->
                         </tbody>
                     </table>
 
@@ -126,18 +127,19 @@
 
                     <div>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Name</label>
+                            <label for="exampleInputEmail1" class="form-label" id="_nameidlabel">Name</label>
                             <input type="text" class="form-control" id="_pname">
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Price</label>
+                            <label for="exampleInputPassword1" class="form-label" id="_pricelabel">Price</label>
                             <input type="text" class="form-control" id="_price">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3" id="_quantitylabel">
                             <label for="exampleInputPassword1" class="form-label">Quantity</label>
                             <input type="text" class="form-control" id="_pquantity">
                         </div>
                         <button type="submit" class="btn btn-primary" id="_addbtn">Add</button>
+                        <button type="submit" class="btn btn-primary" id="_updatebtn">Update</button>
                     </div>
                 </div>
             </div>

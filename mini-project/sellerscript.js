@@ -121,6 +121,45 @@ var abi = [
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "_addr",
+				"type": "address"
+			},
+			{
+				"internalType": "int256",
+				"name": "_pid",
+				"type": "int256"
+			}
+		],
+		"name": "getNextProduct",
+		"outputs": [
+			{
+				"internalType": "int256",
+				"name": "",
+				"type": "int256"
+			},
+			{
+				"internalType": "int256",
+				"name": "",
+				"type": "int256"
+			},
+			{
+				"internalType": "int256",
+				"name": "",
+				"type": "int256"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "int256",
 				"name": "_oid",
 				"type": "int256"
@@ -202,6 +241,25 @@ var abi = [
 	{
 		"inputs": [],
 		"name": "getTotalProduct",
+		"outputs": [
+			{
+				"internalType": "int256",
+				"name": "",
+				"type": "int256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_addr",
+				"type": "address"
+			}
+		],
+		"name": "getTotalProductByProducer",
 		"outputs": [
 			{
 				"internalType": "int256",
@@ -366,7 +424,7 @@ var abi = [
 	}
 ];
 
-var address = "0x80EBca90c0c7028c9679A71357e4c3C163c21bd0";
+var address = "0x31805224bE2e25c02Cc9E8C3333FA0FD8Cf0eD37";
 
 web3 = new Web3(web3.currentProvider);
 var contract = new web3.eth.Contract(abi, address);
@@ -381,6 +439,29 @@ $(document).ready(function () {
 			if (flag) {
 				$("#_regdiv").hide();
 			}
+		});
+	});
+
+	web3.eth.getAccounts().then(function (accounts) {
+		var account = accounts[0];
+		contract.methods.getTotalProductByProducer(account).call().then(function (totalProduct) {
+			console.log("totalProduct : " + totalProduct);
+			$("#_totalproduct").html(totalProduct);
+
+			// contract.methods.getNextProduct(account,1).call().then(function (pid) {
+			// 	console.log(pid)
+			// });
+			// const pids = [];
+			var index = 1
+			for (index = 1; index <= totalProduct; index++) {
+				contract.methods.getNextProduct(account, index).call().then(function (productDetails) {
+					index = productDetails + 1;
+					console.log(productDetails);
+					var row = "<tr><th>" + productDetails[0] + "</th><td>" + productDetails[3] + "</td><td>" + productDetails[1] + "</td><td>" + productDetails[2] + "</td><td><button type=\"button\" class=\"btn btn-secondary btn-sm\" onclick=\"priceUpdate(" + productDetails[0] + ")\">Change price</button></td></tr>";
+					$("#_myproduct_table").find('tbody').append(row);
+				});
+			}
+
 		});
 	});
 
@@ -407,8 +488,8 @@ $(document).ready(function () {
 			var pquantity = $("#_pquantity").val();
 			console.log(pname + pprice + pquantity);
 
-			return contract.methods.addProduct(pname,pprice,pquantity).send({ from: account });
-		}).then(function(trx){
+			return contract.methods.addProduct(pname, pprice, pquantity).send({ from: account });
+		}).then(function (trx) {
 			console.log(trx);
 			if (trx.status) {
 				alert("Product added!");
@@ -419,5 +500,36 @@ $(document).ready(function () {
 		});
 	});
 
-	
+	$("#_updatebtn").click(function () {
+		web3.eth.getAccounts().then(function (accounts) {
+			var account = accounts[0];
+			var pid = $("#_pname").val();
+			var pprice = $("#_price").val();
+			console.log("update button click " + pid + pprice);
+
+			return contract.methods.updatePrice(pid, pprice).send({ from: account });
+		}).then(function (trx) {
+			console.log(trx);
+			if (trx.status) {
+				alert("Price updated!");
+				$("#_nameidlabel").html("Name");
+				$("#_pricelabel").html("Price");
+				$("#_quantitylabel").show();
+				$("#_addbtn").show();
+			}
+		});
+	});
+
+
 });
+
+
+function priceUpdate(productId) {
+	console.log("order click : " + productId);
+	// alert(productId);
+	$("#_nameidlabel").html("Product ID");
+	$("#_pricelabel").html("New price");
+	$("#_quantitylabel").hide();
+	$("#_addbtn").hide();
+	$("#_pname").val(productId);
+}
