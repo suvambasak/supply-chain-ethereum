@@ -25,42 +25,13 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Supply Chain | Seller</a>
-
-            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button> -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <!-- <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li> -->
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li> -->
-                    <li class="nav-item dropdown">
-                        <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
-                        </a> -->
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
-                    </li>
-                </ul>
-                <form class="d-flex">
-                    <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
-                    <button class="btn btn-outline-light" type="submit">View</button>
-                </form>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+                <div class="d-flex">
+                    <a href="/index.html">
+                        <button class="btn btn-outline-light">buyer</button>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
@@ -72,16 +43,17 @@
                 <div class="row" id="_regdiv">
                     <h4>Register</h4>
                     <div>
-                        <div class="mb-3">
+                        <div>
                             <label for="exampleInputEmail1" class="form-label">Your name</label>
                             <input type="text" class="form-control" id="_regname">
                         </div>
+
                         <button type="submit" class="btn btn-primary" id="_regbutton">Register</button>
                     </div>
                 </div>
                 <div class="row  mt-5">
                     <h4>Your product(s) <span class="badge rounded-pill bg-dark" id="_totalproduct"></span></h4>
-                    
+
                     <table class="table" id="_myproduct_table">
                         <thead>
                             <tr>
@@ -99,30 +71,15 @@
                                 <td>300</td>
                                 <td>3</td>
                                 <td><button type="button" class="btn btn-secondary btn-sm" onclick="priceUpdate(1)">Change price</button></td>
-                            </tr>
-                            <tr>
-                                <th>2</th>
-                                <td>Product 2</td>
-                                <td>1000</td>
-                                <td>10</td>
-                                <td><button type="button" class="btn btn-secondary btn-sm" onclick="priceUpdate(2)">Change price</button></td>
-                            </tr>
-                            <tr>
-                                <th>3</th>
-                                <td>Product 3</td>
-                                <td>550</td>
-                                <td>5</td>
-                                <td><button type="button" class="btn btn-secondary btn-sm" onclick="priceUpdate(3)">Change price</button></td>
                             </tr> -->
                         </tbody>
                     </table>
 
                 </div>
 
-
             </div>
             <div class="col-4">
-                <div class="row">
+                <div class="row mt-5">
                     <h4>Add product</h4>
 
                     <div>
@@ -142,6 +99,38 @@
                         <button type="submit" class="btn btn-primary" id="_updatebtn">Update</button>
                     </div>
                 </div>
+            </div>
+            <div class="row  mt-5">
+                <h4>Your order(s) <span class="badge rounded-pill bg-dark" id="_total_order"></span></h4>
+
+                <table class="table" id="_order_table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Order ID</th>
+                            <th scope="col">Product ID</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Customer name</th>
+                            <th scope="col">Delivery address</th>
+                            <th scope="col">Status</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- <tr>
+                            <th>1</th>
+                            <td>1</td>
+                            <td>30</td>
+                            <td>Amit</td>
+                            <td>Kolkata</td>
+                            <td>Status</td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm" onclick="delivered(1)">Delivered</button>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="reject(1)">Reject</button>
+                            </td>
+                        </tr> -->
+                    </tbody>
+                </table>
+
             </div>
         </div>
     </div>

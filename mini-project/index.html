@@ -26,41 +26,13 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Supply Chain | Products</a>
 
-            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button> -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <!-- <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li> -->
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li> -->
-                    <li class="nav-item dropdown">
-                        <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
-                        </a> -->
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
-                    </li>
-                </ul>
-                <form class="d-flex">
-                    <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
-                    <button class="btn btn-outline-light" type="submit">Seller</button>
-                </form>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+                <div class="d-flex">
+                    <a href="/seller.html">
+                        <button class="btn btn-outline-light">Seller</button>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
@@ -69,12 +41,12 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-8">
-                <h2>Products</h2>
+                <h2>Product(s) <span class="badge rounded-pill bg-dark" id="_products_table"></span></h2>
 
                 <table class="table" id="_product_table">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">ID</th>
                             <th scope="col">Name</th>
                             <th scope="col">Price</th>
                             <th scope="col">Quantity</th>
@@ -88,24 +60,9 @@
                             <td>300</td>
                             <td>3</td>
                             <td><button type="button" class="btn btn-secondary btn-sm" onclick="productOrderClick(1)">Order</button></td>
-                        </tr>
-                        <tr>
-                            <th>2</th>
-                            <td>Product 2</td>
-                            <td>1000</td>
-                            <td>10</td>
-                            <td><button type="button" class="btn btn-secondary btn-sm" onclick="productOrderClick(2)">Order</button></td>
-                        </tr>
-                        <tr>
-                            <th>3</th>
-                            <td>Product 3</td>
-                            <td>550</td>
-                            <td>5</td>
-                            <td><button type="button" class="btn btn-secondary btn-sm" onclick="productOrderClick(3)">Order</button></td>
                         </tr> -->
                     </tbody>
                 </table>
-
 
             </div>
             <div class="col-4">
@@ -133,7 +90,27 @@
                     </div>
                 </div>
                 <div class="row  mt-5">
-                    <h4>Track <span class="badge rounded-pill bg-danger" id="_track">2</span></h4>
+                    <h4>Track <span class="badge rounded-pill bg-dark" id="_track"></span></h4>
+
+                    <table class="table table-light" id="_order_table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Order ID</th>
+                                <th scope="col">Delivery address</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <!-- <tr>
+                            <th scope="row">1</th>
+                            <td>Thornton</td>
+                            <td>Mark</td>
+                          </tr>-->
+
+                        </tbody>
+                    </table>
 
                 </div>
             </div>

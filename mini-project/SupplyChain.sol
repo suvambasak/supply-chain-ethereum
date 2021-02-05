@@ -86,6 +86,26 @@ contract MyContract{
         products[_pid].price = _newPrice;
     }
     
+    function getMyTotalOrder(address _addr) view public returns(int){
+        int counter=0;
+        for(int i=1;i<=totalOrder;i++){
+            if(products[orders[i].product_id].producer_address==_addr){
+                counter++;
+            }
+        }
+        return (counter);
+    }
+    
+    function getMyNextOrderById(address _addr,int _oid) view public returns(int,int,int,string memory,string memory,string memory){
+         require(_oid<=totalOrder);
+         for(int i=_oid; i<=totalOrder; i++){
+             if(products[orders[i].product_id].producer_address==_addr){
+                 return (orders[i].id, orders[i].product_id, orders[i].quantity, orders[i].customer_name, orders[i].status, orders[i].delivery_address);
+             }
+         }
+         return (0,0,0,"","","");
+    }
+    
     function updateOrderStatus(int _oid, string memory _status) public{
         require(products[orders[_oid].product_id].producer_address == msg.sender);
         orders[_oid].status = _status;
@@ -114,28 +134,24 @@ contract MyContract{
         products[_pid].quantity -= _quantity;
     }
     
-    function getTotalOrder() view public returns(int){
+    function getTotalOrder(address _addr) view public returns(int){
         int counter=0;
         for(int i=1;i<=totalOrder;i++){
-            if(msg.sender==orders[i].customer_address){
+            if(_addr==orders[i].customer_address){
                 counter++;
             }
         }
         return (counter);
     }
     
-    function fetchNextOrderId(int _oid) view public returns(int){
+    function fetchNextOrderById(address _addr, int _oid) view public returns(int,int,int,string memory,string memory,string memory){
+        require(_oid<=totalOrder);
         for(int i=_oid; i<=totalOrder; i++){
-            if(msg.sender==orders[i].customer_address){
-                return (i);
+            if(_addr==orders[i].customer_address){
+                return (orders[i].id, orders[i].product_id, orders[i].quantity, orders[i].customer_name, orders[i].status, orders[i].delivery_address);
             }
         }
-        return (_oid);
-    }
-    
-    function getOrderDetailsById(int _oid) view public returns(int, int, string memory, string memory, string memory){
-        require(msg.sender==orders[_oid].customer_address);
-        return (orders[_oid].product_id, orders[_oid].quantity, orders[_oid].customer_name, orders[_oid].status, orders[_oid].delivery_address);
+        return (0,0,0,"","","");
     }
 
 }
