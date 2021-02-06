@@ -123,9 +123,9 @@ contract MyContract{
     
     // customer
     
-    function getProductById(int _pid) view public returns (int, int, string memory) {
+    function getProductById(int _pid) view public returns (int, int, int, string memory) {
         require(_pid <= totalProduct);
-        return (products[_pid].price, products[_pid].quantity, products[_pid].product_name);
+        return (products[_pid].id, products[_pid].price, products[_pid].quantity, products[_pid].product_name);
     }
     
     function placeOrder(string memory _cname, string memory _daddress, int _pid, int _quantity) public {
