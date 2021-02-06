@@ -7,13 +7,12 @@ $(document).ready(function () {
 	contract.methods.getTotalProduct().call().then(function (totalProduct) {
 		console.log("totalProduct : " + totalProduct);
 		$("#_products_table").html(totalProduct);
-		var local_id = 1;
+
 		for (var i = 1; i <= totalProduct; i++) {
 			contract.methods.getProductById(i).call().then(function (productDetails) {
 				console.log(productDetails);
-				var row = "<tr><th>" + local_id + "</th><td>" + productDetails[2] + "</td><td>" + productDetails[0] + "</td><td>" + productDetails[1] + "</td><td><button type=\"button\" class=\"btn btn-secondary btn-sm\" onclick=\"productOrderClick(" + local_id + ")\">Order</button></td></tr>";
+				var row = "<tr><th>" + productDetails[0] + "</th><td>" + productDetails[3] + "</td><td>" + productDetails[1] + "</td><td>" + productDetails[2] + "</td><td><button type=\"button\" class=\"btn btn-secondary btn-sm\" onclick=\"productOrderClick(" + productDetails[0] + ")\">Order</button></td></tr>";
 				$("#_product_table").find('tbody').append(row);
-				local_id++;
 			});
 		}
 	});
