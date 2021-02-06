@@ -1,496 +1,3 @@
-var abi = [
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_pname",
-				"type": "string"
-			},
-			{
-				"internalType": "int256",
-				"name": "_price",
-				"type": "int256"
-			},
-			{
-				"internalType": "int256",
-				"name": "_quantity",
-				"type": "int256"
-			}
-		],
-		"name": "addProduct",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_cname",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_daddress",
-				"type": "string"
-			},
-			{
-				"internalType": "int256",
-				"name": "_pid",
-				"type": "int256"
-			},
-			{
-				"internalType": "int256",
-				"name": "_quantity",
-				"type": "int256"
-			}
-		],
-		"name": "placeOrder",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_name",
-				"type": "string"
-			}
-		],
-		"name": "reginsterProducer",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "int256",
-				"name": "_oid",
-				"type": "int256"
-			},
-			{
-				"internalType": "string",
-				"name": "_status",
-				"type": "string"
-			}
-		],
-		"name": "updateOrderStatus",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "int256",
-				"name": "_pid",
-				"type": "int256"
-			},
-			{
-				"internalType": "int256",
-				"name": "_newPrice",
-				"type": "int256"
-			}
-		],
-		"name": "updatePrice",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_addr",
-				"type": "address"
-			},
-			{
-				"internalType": "int256",
-				"name": "_oid",
-				"type": "int256"
-			}
-		],
-		"name": "fetchNextOrderById",
-		"outputs": [
-			{
-				"internalType": "int256",
-				"name": "",
-				"type": "int256"
-			},
-			{
-				"internalType": "int256",
-				"name": "",
-				"type": "int256"
-			},
-			{
-				"internalType": "int256",
-				"name": "",
-				"type": "int256"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_addr",
-				"type": "address"
-			},
-			{
-				"internalType": "int256",
-				"name": "_oid",
-				"type": "int256"
-			}
-		],
-		"name": "getMyNextOrderById",
-		"outputs": [
-			{
-				"internalType": "int256",
-				"name": "",
-				"type": "int256"
-			},
-			{
-				"internalType": "int256",
-				"name": "",
-				"type": "int256"
-			},
-			{
-				"internalType": "int256",
-				"name": "",
-				"type": "int256"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_addr",
-				"type": "address"
-			}
-		],
-		"name": "getMyTotalOrder",
-		"outputs": [
-			{
-				"internalType": "int256",
-				"name": "",
-				"type": "int256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_addr",
-				"type": "address"
-			},
-			{
-				"internalType": "int256",
-				"name": "_pid",
-				"type": "int256"
-			}
-		],
-		"name": "getNextProduct",
-		"outputs": [
-			{
-				"internalType": "int256",
-				"name": "",
-				"type": "int256"
-			},
-			{
-				"internalType": "int256",
-				"name": "",
-				"type": "int256"
-			},
-			{
-				"internalType": "int256",
-				"name": "",
-				"type": "int256"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "int256",
-				"name": "_pid",
-				"type": "int256"
-			}
-		],
-		"name": "getProductById",
-		"outputs": [
-			{
-				"internalType": "int256",
-				"name": "",
-				"type": "int256"
-			},
-			{
-				"internalType": "int256",
-				"name": "",
-				"type": "int256"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_addr",
-				"type": "address"
-			}
-		],
-		"name": "getTotalOrder",
-		"outputs": [
-			{
-				"internalType": "int256",
-				"name": "",
-				"type": "int256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getTotalProduct",
-		"outputs": [
-			{
-				"internalType": "int256",
-				"name": "",
-				"type": "int256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_addr",
-				"type": "address"
-			}
-		],
-		"name": "getTotalProductByProducer",
-		"outputs": [
-			{
-				"internalType": "int256",
-				"name": "",
-				"type": "int256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_addr",
-				"type": "address"
-			}
-		],
-		"name": "isRegistered",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "int256",
-				"name": "",
-				"type": "int256"
-			}
-		],
-		"name": "orders",
-		"outputs": [
-			{
-				"internalType": "int256",
-				"name": "id",
-				"type": "int256"
-			},
-			{
-				"internalType": "int256",
-				"name": "product_id",
-				"type": "int256"
-			},
-			{
-				"internalType": "int256",
-				"name": "quantity",
-				"type": "int256"
-			},
-			{
-				"internalType": "string",
-				"name": "customer_name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "status",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "delivery_address",
-				"type": "string"
-			},
-			{
-				"internalType": "address",
-				"name": "customer_address",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "producers",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "int256",
-				"name": "",
-				"type": "int256"
-			}
-		],
-		"name": "products",
-		"outputs": [
-			{
-				"internalType": "int256",
-				"name": "id",
-				"type": "int256"
-			},
-			{
-				"internalType": "int256",
-				"name": "price",
-				"type": "int256"
-			},
-			{
-				"internalType": "int256",
-				"name": "quantity",
-				"type": "int256"
-			},
-			{
-				"internalType": "string",
-				"name": "product_name",
-				"type": "string"
-			},
-			{
-				"internalType": "address",
-				"name": "producer_address",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "totalOrder",
-		"outputs": [
-			{
-				"internalType": "int256",
-				"name": "",
-				"type": "int256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "totalProduct",
-		"outputs": [
-			{
-				"internalType": "int256",
-				"name": "",
-				"type": "int256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	}
-];
-
-var address = "0xBD3A12024C2E8F6c25c33be8E85d4b28Ffa6162a";
-
 web3 = new Web3(web3.currentProvider);
 var contract = new web3.eth.Contract(abi, address);
 console.log("blockchain connected")
@@ -498,6 +5,7 @@ console.log("blockchain connected")
 $(document).ready(function () {
 	$("#_updatebtn").hide();
 
+	// registered seller.
 	web3.eth.getAccounts().then(function (accounts) {
 		var account = accounts[0];
 		contract.methods.isRegistered(account).call().then(function (flag) {
@@ -508,38 +16,58 @@ $(document).ready(function () {
 		});
 	});
 
+
 	web3.eth.getAccounts().then(function (accounts) {
 		var account = accounts[0];
-		contract.methods.getTotalProductByProducer(account).call().then(function (totalProduct) {
-			console.log("totalProduct : " + totalProduct);
+
+		// total my product
+		contract.methods.getTotalProduct(account).call().then(function (totalProduct) {
+			console.log("totalProduct my : " + totalProduct);
 			$("#_totalproduct").html(totalProduct);
+		});
+
+
+		// fetch my products.
+		contract.methods.getTotalProduct().call().then(function (totalProduct) {
+			console.log("totalProduct (global): " + totalProduct);
 
 			var index = 1;
 			for (index = 1; index <= totalProduct; index++) {
 				contract.methods.getNextProduct(account, index).call().then(function (productDetails) {
-					index = productDetails + 1;
+					// index = productDetails + 1;
 					console.log(productDetails);
-					var row = "<tr><th>" + productDetails[0] + "</th><td>" + productDetails[3] + "</td><td>" + productDetails[1] + "</td><td>" + productDetails[2] + "</td><td><button type=\"button\" class=\"btn btn-secondary btn-sm\" onclick=\"priceUpdate(" + productDetails[0] + ")\">Change price</button></td></tr>";
-					$("#_myproduct_table").find('tbody').append(row);
+					if (productDetails[4]) {
+						var row = "<tr><th>" + productDetails[0] + "</th><td>" + productDetails[3] + "</td><td>" + productDetails[1] + "</td><td>" + productDetails[2] + "</td><td><button type=\"button\" class=\"btn btn-secondary btn-sm\" onclick=\"priceUpdate(" + productDetails[0] + ")\">Change price</button></td></tr>";
+						$("#_myproduct_table").find('tbody').append(row);
+					}
 				});
 			}
 
 		});
 
+
+		// total my product
 		contract.methods.getMyTotalOrder(account).call().then(function (totalOrder) {
-			console.log("totalOrder : " + totalOrder);
+			console.log("totalOrder my : " + totalOrder);
 			$("#_total_order").html(totalOrder);
 
-			var index;
+		});
+
+		// fetch my order.
+		contract.methods.getTotalOrder().call().then(function (totalOrder) {
+			console.log("totalOrder (global): " + totalOrder);
+
+			var index = 1;
 			for (index = 1; index <= totalOrder; index++) {
 				contract.methods.getMyNextOrderById(account, index).call().then(function (orderDetails) {
-					index = orderDetails + 1;
+					// index = orderDetails + 1;
 					console.log(orderDetails);
-					var row = "<tr><th>" + orderDetails[0] + "</th><td>" + orderDetails[1] + "</td><td>" + orderDetails[2] + "</td><td>" + orderDetails[3] + "</td><td>" + orderDetails[5] + "</td><td>" + orderDetails[4] + "</td><td><button type=\"button\" class=\"btn btn-primary btn-sm\" onclick=\"delivered(" + orderDetails[0] + ")\">Delivered</button>\n<button type=\"button\" class=\"btn btn-secondary btn-sm\" onclick=\"reject(" + orderDetails[0] + ")\">Reject</button></td></tr>";
-					$("#_order_table").find('tbody').append(row);
+					if (orderDetails[6]) {
+						var row = "<tr><th>" + orderDetails[0] + "</th><td>" + orderDetails[1] + "</td><td>" + orderDetails[2] + "</td><td>" + orderDetails[3] + "</td><td>" + orderDetails[5] + "</td><td>" + orderDetails[4] + "</td><td><button type=\"button\" class=\"btn btn-primary btn-sm\" onclick=\"delivered(" + orderDetails[0] + ")\">Delivered</button>\n<button type=\"button\" class=\"btn btn-secondary btn-sm\" onclick=\"reject(" + orderDetails[0] + ")\">Reject</button></td></tr>";
+						$("#_order_table").find('tbody').append(row);
+					}
 				});
 			}
-
 		});
 
 
