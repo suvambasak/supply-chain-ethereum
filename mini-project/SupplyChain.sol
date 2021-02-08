@@ -115,7 +115,15 @@ contract MyContract{
     
     function updateOrderStatus(int _oid, string memory _status) public {
         require(products[orders[_oid].product_id].producer_address == msg.sender);
-        orders[_oid].status = _status;
+        if (keccak256(abi.encodePacked(_status)) == keccak256(abi.encodePacked("Rejected"))) {
+            products[orders[_oid].product_id].quantity+=orders[_oid].quantity;
+            orders[_oid].status = _status;
+        }else{
+            if(keccak256(abi.encodePacked(orders[_oid].status))!=keccak256(abi.encodePacked("Rejected"))&&
+            keccak256(abi.encodePacked(_status))==keccak256(abi.encodePacked("Delivered"))){
+                orders[_oid].status = _status;
+            }
+        }
     }
     
     
