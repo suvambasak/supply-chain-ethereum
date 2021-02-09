@@ -4,6 +4,7 @@ console.log("blockchain connected")
 
 $(document).ready(function () {
 	$("#_updatebtn").hide();
+	$("#_addbtn").hide();
 
 	// registered seller.
 	web3.eth.getAccounts().then(function (accounts) {
@@ -12,6 +13,7 @@ $(document).ready(function () {
 			console.log("isRegistered : " + flag);
 			if (flag) {
 				$("#_regdiv").hide();
+				$("#_addbtn").show();
 			}
 		});
 	});
@@ -84,6 +86,7 @@ $(document).ready(function () {
 			console.log(trx);
 			if (trx.status) {
 				$("#_regdiv").hide();
+				$("#_addbtn").show();
 			}
 		});
 	});
