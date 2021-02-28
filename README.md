@@ -2,13 +2,13 @@
 
 # Functionalities
 
-- Producer can register him as a producer
-- After registration he can add products, the attributes of product are
+- The producer can register him as a producer
+- After registration he can add products, the attributes of a product are
     - Product ID
     - Product name
     - Price
     - Quantity
-- Producer should be able to change the price, if he want.
+- The producer should be able to change the price if he wants.
 - Customer can view the products
 - Customer can order the products (no need of sending money, only COD)
 - Customer can track the product using the order ID
@@ -16,7 +16,7 @@
     - Placed
     - Rejected
     - Delivered
-- The producer have the authority to change the status of the product (when customer place an order, the status will be “Placed”).
+- The producer has the authority to change the status of the product (when the customer places an order, the status will be “Placed”).
 
 
 # Want to run on your machine?
