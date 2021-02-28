@@ -6,7 +6,7 @@ $(document).ready(function () {
 	$("#_updatebtn").hide();
 	$("#_addbtn").hide();
 
-	// registered seller.
+	// Show / hide register section.
 	web3.eth.getAccounts().then(function (accounts) {
 		var account = accounts[0];
 		contract.methods.isRegistered(account).call().then(function (flag) {
@@ -19,17 +19,18 @@ $(document).ready(function () {
 	});
 
 
+	// Fetching products.
 	web3.eth.getAccounts().then(function (accounts) {
 		var account = accounts[0];
 
-		// total my product
+		// Total my product
 		contract.methods.getTotalProduct(account).call().then(function (totalProduct) {
 			console.log("totalProduct my : " + totalProduct);
 			$("#_totalproduct").html(totalProduct);
 		});
 
 
-		// fetch my products.
+		// Fetch my products.
 		contract.methods.getTotalProduct().call().then(function (totalProduct) {
 			console.log("totalProduct (global): " + totalProduct);
 
@@ -48,14 +49,14 @@ $(document).ready(function () {
 		});
 
 
-		// total my product
+		// Fetching total number of my product.
 		contract.methods.getMyTotalOrder(account).call().then(function (totalOrder) {
 			console.log("totalOrder my : " + totalOrder);
 			$("#_total_order").html(totalOrder);
 
 		});
 
-		// fetch my order.
+		// Fetch my orders.
 		contract.methods.getTotalOrder().call().then(function (totalOrder) {
 			console.log("totalOrder (global): " + totalOrder);
 
@@ -75,7 +76,7 @@ $(document).ready(function () {
 
 	});
 
-
+	// Register new producer.
 	$("#_regbutton").click(function () {
 		web3.eth.getAccounts().then(function (accounts) {
 			var account = accounts[0];
@@ -91,7 +92,7 @@ $(document).ready(function () {
 		});
 	});
 
-
+	// Adding new product.
 	$("#_addbtn").click(function () {
 		web3.eth.getAccounts().then(function (accounts) {
 			var account = accounts[0];
@@ -113,6 +114,7 @@ $(document).ready(function () {
 		});
 	});
 
+	// Update the price of a product.
 	$("#_updatebtn").click(function () {
 		web3.eth.getAccounts().then(function (accounts) {
 			var account = accounts[0];
@@ -140,6 +142,7 @@ $(document).ready(function () {
 
 });
 
+// Reject order.
 function reject(orderId) {
 	console.log("Reject " + orderId);
 
@@ -156,6 +159,7 @@ function reject(orderId) {
 	});
 }
 
+// Delivered order.
 function delivered(orderId) {
 	console.log("delivered " + orderId);
 	web3.eth.getAccounts().then(function (accounts) {
@@ -171,6 +175,7 @@ function delivered(orderId) {
 	});
 }
 
+// Add the product details in from for price update.
 function priceUpdate(productId) {
 	console.log("order click : " + productId);
 	// alert(productId);
@@ -181,8 +186,4 @@ function priceUpdate(productId) {
 	$("#_addbtn").hide();
 	$("#_updatebtn").show();
 	$("#_pname").val(productId);
-}
-
-function gotoBuyer() {
-	location.href = "http://127.0.0.1:8080/index.html";
 }

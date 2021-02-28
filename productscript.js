@@ -21,12 +21,13 @@ $(document).ready(function () {
 	web3.eth.getAccounts().then(function (accounts) {
 		var account = accounts[0];
 
-
+		// Fetching total number of order.
 		contract.methods.getTotalOrder(account).call().then(function (totalOrder) {
 			console.log("totalOrder : " + totalOrder);
 			$("#_track").html(totalOrder);
 		});
 
+		// Fetching all products.
 		contract.methods.getTotalOrder().call().then(function (totalOrder) {
 			console.log("totalOrder (global) : " + totalOrder);
 
@@ -42,10 +43,9 @@ $(document).ready(function () {
 		});
 
 
-
 	});
 
-
+	// Placing order.
 	$("#_orderbtn").click(function () {
 		web3.eth.getAccounts().then(function (accounts) {
 			var account = accounts[0];
@@ -73,6 +73,7 @@ $(document).ready(function () {
 
 });
 
+// Order button action.
 function productOrderClick(productId) {
 	console.log("order click : " + productId);
 	$("#_pid").val(productId);
